@@ -18,6 +18,10 @@ class Config:
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Verify that the DATABASE_URL is being read correctly
+    print("Database URL:", app.config['SQLALCHEMY_DATABASE_URI'])
+
     db.init_app(app)
     migrate.init_app(app, db)
 
