@@ -7,8 +7,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
     role = db.Column(db.String(50))
     is_active = db.Column(db.Boolean, default=True)
-    confirmed_admin = db.Column(db.Boolean, default=False)  # Add this line
-
+    confirmed_admin = db.Column(db.Boolean, default=False) 
     def __repr__(self):
         return f'<User {self.username}>'
 
