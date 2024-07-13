@@ -1,15 +1,25 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 
-from app.confiq import Config
-db=SQLAlchemy()
+db = SQLAlchemy()
+
+class Config:
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://josephine:root@localhost:5432/inventory_db1')
+    ENVIRONMENT = os.getenv('APP_ENV', 'development')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 def create_app():
-    app=Flask(__name__)
+    
+    load_dotenv()
+
+    app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
+
     with app.app_context():
-        #import routes and models
         from app import models, routes
         db.create_all()
-        return app
+
+    return app
