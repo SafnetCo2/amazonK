@@ -3,6 +3,11 @@ from app import db
 from app.models import User
 from flask import current_app as app
 
+
+
+
+
+
 @app.route('/users', methods=['GET'])
 def list_user():
     users = User.query.all()
